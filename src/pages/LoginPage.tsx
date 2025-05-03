@@ -11,6 +11,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,6 +24,7 @@ const LoginPage = () => {
     setError('');
 
     try {
+      setLoading(true);
       // Replace '/api/login' with your actual login API endpoint
       const response = await axios.post(`${apiUrl}/api/auth/login`, {
         username,
@@ -41,6 +43,8 @@ const LoginPage = () => {
       setError(
         err.response?.data?.message || 'Login failed. Please try again.'
       );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -70,6 +74,7 @@ const LoginPage = () => {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               data-testid="username-input"
+              disabled={loading}
             />
             <p className="text-xs text-gray-500 mt-1">Hint: admin@inspectify.com</p>
           </div>
@@ -87,6 +92,7 @@ const LoginPage = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               data-testid="password-input"
+              disabled={loading}
             />
             <p className="text-xs text-gray-500 mt-1">Hint: admin@123</p>
           </div>
@@ -110,8 +116,9 @@ const LoginPage = () => {
               id="login-button"
               className="btn btn-primary w-full"
               data-testid="login-button"
-            >
-              Sign in
+              disabled={loading}
+              >
+              {loading ? 'Logging in...' : 'Sign in'}
             </button>
           </div>
         </form>
