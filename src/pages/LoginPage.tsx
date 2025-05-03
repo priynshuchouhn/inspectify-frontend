@@ -66,11 +66,12 @@ const LoginPage = () => {
               id="username"
               name="username"
               className="input-field"
-              placeholder="Enter your username"
+              placeholder="admin@inspectify.com"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               data-testid="username-input"
             />
+            <p className="text-xs text-gray-500 mt-1">Hint: admin@inspectify.com</p>
           </div>
           
           <div className="mb-6">
@@ -82,11 +83,12 @@ const LoginPage = () => {
               id="password"
               name="password"
               className="input-field"
-              placeholder="Enter your password"
+              placeholder="admin@123"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               data-testid="password-input"
             />
+            <p className="text-xs text-gray-500 mt-1">Hint: admin@123</p>
           </div>
           
           <div className="flex items-center mb-6">
